@@ -1,7 +1,7 @@
 from random import randint
 
 class Point:
-
+    # Initialising rectangle co-ordinates
     def __init__(self, x, y):
         self.x = x
         self.y = y
