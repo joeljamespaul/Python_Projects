@@ -1,0 +1,18 @@
+Title: Flatmates Bill
+
+Description: An app that takes input as the total of expenses for a particular period of time and the duration that
+each Flatmate/Tenant gas stayed in the home and returns the share if the final bill that they have to split between
+them. It will also generate a report (PDF file type) containing the names of the flatmates, the period, and howmuch
+each of them had to pay.
+
+Objects: Bill:
+                amount
+                period
+         Flatmate:
+                name
+                stay_in_the_house
+                pays(bill)
+         PdfReport:
+                 filename
+                 generate(flatmate1,flatmate2,bill
+                 )
