@@ -23,10 +23,10 @@ class Flatmate:
         self.name = name
         self.days_in_house = days_in_house
 
-    def pays(self, bill, days_in_house_other_flatmate):
-        pay_coefficient = self.days_in_house / (self.days_in_house + days_in_house_other_flatmate)
+    def pays(self, bill, flatmate2):
+        pay_coefficient = self.days_in_house / (self.days_in_house + flatmate2.days_in_house)
         pay_share = pay_coefficient * bill.total_expense
-        return round(pay_share,3)
+        return round(pay_share, 3)
 
 
 class PdfGenerator:
@@ -40,14 +40,34 @@ class PdfGenerator:
         self.filename = filename
 
     def generate(self, flatmate1, flatmate2, bill):
-        pass
+        # Initialize FPDF method and add a page
+
+        pdf = FPDF(orientation='P', unit='pt', format='A4')
+        pdf.add_page()
+
+        # Insert Title
+        pdf.set_font(family='Arial', style='B', size=25)
+        pdf.cell(w=0, h=80, txt="Flatmates Bill", border=1, align="C", ln=1)
+
+        # Insert period Label and value
+        pdf.cell(w=150, h=80, txt="Period: ", border=1)
+        pdf.cell(w=150, h=80, txt=bill.period, border=1, align="C", ln=1)
+
+        # Insert name and due amount of the first flatmate
+        pdf.cell(w=150, h=80, txt=flatmate1.name, border=1)
+        pdf.cell(w=150, h=80, txt=str(flatmate1.pays(bill, paul)), border=1, align="C", ln=1)
+
+        # Insert name and due amount of the first flatmate
+        pdf.cell(w=150, h=80, txt=flatmate2.name, border=1)
+        pdf.cell(w=150, h=80, txt=str(flatmate2.pays(bill, james)), border=1, align="C")
+
+        pdf.output(self.filename)
 
 
 the_bill = Bill(total_expense=2556, period="May 2017")
 james = Flatmate("James", 20)
 paul = Flatmate("Paul", 30)
 
-print("{} pays {}".format(james.name,james.pays(the_bill, paul.days_in_house)))
-print("{} pays {}".format(paul.name,paul.pays(the_bill, james.days_in_house)))
 
-pdf = FPDF()
+createPDF = PdfGenerator(filename="Report.pdf")
+createPDF.generate(james, paul, the_bill)
