@@ -1,5 +1,9 @@
+import webbrowser
+import os
+
 from fpdf import FPDF
 
+current_path = os.getcwd()
 
 class Bill:
     """
@@ -45,23 +49,31 @@ class PdfGenerator:
         pdf = FPDF(orientation='P', unit='pt', format='A4')
         pdf.add_page()
 
+        #Adding an icon
+        pdf.image(name='house.png', w=50, h=50)
         # Insert Title
         pdf.set_font(family='Arial', style='B', size=25)
-        pdf.cell(w=0, h=80, txt="Flatmates Bill", border=1, align="C", ln=1)
+        pdf.cell(w=0, h=80, txt="Flatmates Bill", border=0, align="C", ln=1)
 
         # Insert period Label and value
-        pdf.cell(w=150, h=80, txt="Period: ", border=1)
-        pdf.cell(w=150, h=80, txt=bill.period, border=1, align="C", ln=1)
+        pdf.set_font(family='Times', style='B',size=18)
+        pdf.cell(w=150, h=80, txt="Period: ", border=0)
+        pdf.cell(w=150, h=80, txt=bill.period, border=0, align="C", ln=1)
 
         # Insert name and due amount of the first flatmate
-        pdf.cell(w=150, h=80, txt=flatmate1.name, border=1)
-        pdf.cell(w=150, h=80, txt=str(flatmate1.pays(bill, paul)), border=1, align="C", ln=1)
+        pdf.set_font(family='Times', size=16)
+        pdf.cell(w=150, h=60, txt=flatmate1.name, border=0)
+        pdf.set_font(family='Times', size=14)
+        pdf.cell(w=150, h=60, txt=str(flatmate1.pays(bill, paul)), border=0, align="C", ln=1)
 
         # Insert name and due amount of the first flatmate
-        pdf.cell(w=150, h=80, txt=flatmate2.name, border=1)
-        pdf.cell(w=150, h=80, txt=str(flatmate2.pays(bill, james)), border=1, align="C")
+        pdf.set_font(family='Times', size=16)
+        pdf.cell(w=150, h=60, txt=flatmate2.name, border=0)
+        pdf.set_font(family='Times', size=14)
+        pdf.cell(w=150, h=60, txt=str(flatmate2.pays(bill, james)), border=0, align="C")
 
         pdf.output(self.filename)
+        webbrowser.open(current_path+'\\'+self.filename)
 
 
 the_bill = Bill(total_expense=2556, period="May 2017")
