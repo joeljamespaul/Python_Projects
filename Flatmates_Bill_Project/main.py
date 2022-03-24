@@ -1,8 +1,8 @@
 from flat import Bill, Flatmate
 from pdf_generator import PdfGenerator,FileShare
 
-period = input("Enter the time period of stay: ")
-total_expense = float(input("Enter the total bill for the period of {} (e.g:March 2020) :".format(period)))
+period = input("Enter the time period of stay e.g March 2020: ")
+total_expense = float(input("Enter the total bill for the period of {} :".format(period)))
 the_bill = Bill(total_expense=total_expense, period=period)
 
 flatmate1_name = input("Enter the name of the first_flatmate: ")
