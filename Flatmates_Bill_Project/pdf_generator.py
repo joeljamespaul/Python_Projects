@@ -1,6 +1,6 @@
 import os
 import webbrowser
-
+from filestack import Client
 from fpdf import FPDF
 
 current_path = os.getcwd()
@@ -47,3 +47,16 @@ class PdfGenerator:
         os.chdir('Reports')
         pdf.output(self.filename)
         webbrowser.open(self.filename)
+
+
+class FileShare:
+
+    def __init__(self, filepath, apikey="AFvlWGbtTT92QIZw5Limbz"):
+        self.filepath = filepath
+        self.apikey = apikey
+
+    def uploader(self):
+        client = Client(self.apikey)
+
+        report_file_link = client.upload(filepath=self.filepath)
+        return report_file_link.url

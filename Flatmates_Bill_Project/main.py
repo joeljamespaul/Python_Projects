@@ -1,5 +1,5 @@
 from flat import Bill, Flatmate
-from pdf_generator import PdfGenerator
+from pdf_generator import PdfGenerator,FileShare
 
 period = input("Enter the time period of stay: ")
 total_expense = float(input("Enter the total bill for the period of {} :".format(period)))
@@ -14,3 +14,6 @@ flatmate2 = Flatmate(flatmate2_name, flatmate2_days_in_house)
 
 createPDF = PdfGenerator("{}.pdf".format(the_bill.period))
 createPDF.generate(flatmate1, flatmate2, the_bill)
+
+fileshare = FileShare(createPDF.filename)
+print(fileshare.uploader())
