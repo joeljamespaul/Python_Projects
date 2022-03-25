@@ -1,0 +1,23 @@
+Title: Math Painting
+Description: An app that lets the users provide the origin co-ordinates of geometrical shapes such as
+squares and rectangles, their dimensions, and their colors, and the app produces an image file canvas with all
+the geometrical shapes drawn in it but if the dimensions given exceed the dimensions of the canvas, then that shape will
+not be part of the output.
+Objects: Square:
+            x
+            y
+            side
+            color
+            draw(canvas)
+         Rectangle:
+            x
+            y
+            width
+            height
+            color
+            draw(canvas)
+         Canvas:
+            width
+            height
+            color
+            make(imagepath)
