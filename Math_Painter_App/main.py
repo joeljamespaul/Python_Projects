@@ -1,7 +1,6 @@
 from canvas import Canvas
 from shapes import Rectangle, Square
 
-
 # Get the canvas direction from
 canvas_height = int(input("Please enter the required height of the canvas: "))
 canvas_width = int(input("Please enter the required width of the canvas: "))
